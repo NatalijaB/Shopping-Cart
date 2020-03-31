@@ -25,7 +25,7 @@ import useToggle from './hooks/useToggle'
 
 function Cart(props) {
 
-    const { classes, cartProducts, setCartProducts } = props
+    const { classes, cartProducts, setCartProducts, increaseQuantity } = props
     const [openDrawer, toggleOpenDrawer] = useToggle(false);
     const [openDialog, toggleOpenDialog] = useToggle(false);
 
@@ -33,7 +33,6 @@ function Cart(props) {
         toggleOpenDialog()
         setCartProducts([])
     }
-
 
     const totalPrice = () => {
         let allPrices = []
@@ -46,10 +45,11 @@ function Cart(props) {
         return totalPrice
     }
 
-    const deleteItem = (id) => {
+    const deleteItem = (id, amount) => {
         const updatedCart = cartProducts.filter(prod => prod.id !== id
         )
         setCartProducts(updatedCart)
+        increaseQuantity(id, amount)
     }
 
     const cartItems = cartProducts.map(prod => (
@@ -92,7 +92,7 @@ function Cart(props) {
                 ></ListItemText>
                 <Button
                     aria-label="reduce"
-                    onClick={() => deleteItem(prod.id)}
+                    onClick={() => deleteItem(prod.id, prod.quantity)}
                 >
                     <RemoveIcon
                         style={{ color: "red" }}

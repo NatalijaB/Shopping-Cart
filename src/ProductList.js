@@ -5,7 +5,7 @@ import Product from './Product'
 
 
 export default function ProductList(props) {
-    const {products, cartProducts, setCartProducts, updateQuantity} = props
+    const {products, cartProducts, setCartProducts, reduceQuantity} = props
     const productList = products.map(prod => (
         <Grid
             zeroMinWidth
@@ -26,7 +26,7 @@ export default function ProductList(props) {
                 key={prod.id}
                 cartProducts={cartProducts}
                 setCartProducts={setCartProducts}
-                updateQuantity={updateQuantity}
+                reduceQuantity={reduceQuantity}
             />
         </Grid>
     ))

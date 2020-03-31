@@ -1,16 +1,22 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { items } from './items'
 import ProductList from './ProductList'
 import Navbar from './Navbar'
 
 export default function Shop() {
-    
+
     const [products, setProducts] = useState(items)
     const [cartProducts, setCartProducts] = useState([])
 
-    function updateQuantity(id, amount){
-        const updatedProducts = products.map(i => 
-            i.id === id ? {...i, quantity: i.quantity-amount} : i
+    function reduceQuantity(id, amount) {
+        const updatedProducts = products.map(i =>
+            i.id === id ? { ...i, quantity: i.quantity - amount } : i
+        )
+        setProducts(updatedProducts)
+    }
+    function increaseQuantity(id, amount) {
+        const updatedProducts = products.map(i =>
+            i.id === id ? { ...i, quantity: i.quantity + amount } : i
         )
         setProducts(updatedProducts)
     }
@@ -18,14 +24,15 @@ export default function Shop() {
     return (
         <div>
             <Navbar
-            cartProducts={cartProducts}
-            setCartProducts={setCartProducts}
+                cartProducts={cartProducts}
+                setCartProducts={setCartProducts}
+                increaseQuantity={increaseQuantity}
             />
-            <ProductList 
-            products={products}
-            cartProducts={cartProducts}
-            setCartProducts={setCartProducts}
-            updateQuantity={updateQuantity}
+            <ProductList
+                products={products}
+                cartProducts={cartProducts}
+                setCartProducts={setCartProducts}
+                reduceQuantity={reduceQuantity}
             />
         </div>
     )

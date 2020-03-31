@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/styles';
 import styles from './styles/NavbarStyles'
 
 function Navbar(props) {
-    const {classes, cartProducts, setCartProducts} = props
+    const {classes, cartProducts, setCartProducts, increaseQuantity} = props
     return (
         <div 
         className={classes.Navbar}
@@ -33,6 +33,7 @@ function Navbar(props) {
                             <Cart
                                 cartProducts={cartProducts}
                                 setCartProducts={setCartProducts}
+                                increaseQuantity={increaseQuantity}
                             />
                     </Toolbar>
                 </AppBar>

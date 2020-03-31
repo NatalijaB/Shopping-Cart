@@ -16,14 +16,14 @@ import styles from './styles/ItemStyles'
 import useToggle from './hooks/useToggle'
 
 function Product(props) {
-    const { src, desc, id, quantity, price, classes, cartProducts, setCartProducts, updateQuantity } = props;
+    const { src, desc, id, quantity, price, classes, cartProducts, setCartProducts, reduceQuantity } = props;
 
     const [amount, setAmount] = useState(1)
     const [openSnack, toggleOpenSnack] = useToggle(false)
 
     function addToCart() {
         updateCart()
-        updateQuantity(id, amount)
+        reduceQuantity(id, amount)
         toggleOpenSnack()
         setAmount(1)
     }
